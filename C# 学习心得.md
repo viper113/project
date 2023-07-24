@@ -1,3 +1,5 @@
+
+
 # C# 学习
 
 ## c#基本语法
@@ -242,4 +244,85 @@ string[] strings =new int[5]{"H","E","L","M","Q"}
   ints[0] = 1
   ```
 
-  
+
+
+
+# 案例一：西瓜购买案例
+
+- 正逢双十一超市做活动当商品价格达到十元时就能打7.5折，现在需要到超市购买6斤的西瓜，超市的西瓜价格为1.9元每斤，请问现在购买西瓜花费了多少钱？
+
+## 思考
+
+- 以上需要设置几个变量？
+
+需要设置四个变量分别为西瓜价格，折扣价格，购买数量（斤），花费总价
+
+- 需要声明何种类型的变量？
+
+```javascript
+ double price = 1.9; //每斤购买单价
+  int count = 6;//购买数量买6斤
+ double discount = 0.75 //折扣价格为7.5折
+  double totalPrice;//计算折前总价
+```
+
+- 如果其中要求满几个10元，就在几个10元上打7.5折应该如何计算？
+
+```c#
+ double price = 1.9;
+            int count = 16;
+            double discount = 0.75;
+            double totalPrice;
+            totalPrice = price * count;
+            int d= (int)(totalPrice/10);
+            double totalten = 0;
+           for (int i = 3; i < d; i++)
+            {
+                totalten = totalten+10 * discount;
+            }
+            double y = totalPrice % 10;
+            totalPrice = totalPrice + y;
+            MessageBox.Show(totalPrice.ToString());
+```
+
+
+
+## 总结
+
+- **变量名**只用在**某一区域内**第一次出现才要**声明变量**
+- **变量名**在区域内第二次出现时不用声明变量，而是直接使用之前声明的变量
+- **变量名**命名是我们一般遵循**驼峰命名法**，即以**小写字母开头**，多个单词拼接时，除第一个单词，**其余字母大写**
+- 在程序开发中可以修改之前保存的变量值
+
+## 拓展
+
+- (int)表示使用显示强制转换，时一种类型转换，c#默认整理时int32，因此使用此方法转成int32位，不遵循四舍五入，只截取整理部分；
+- (int)5.21//输出5
+- int.Parse()：只支持将string类型转成int，Parse就是把string类型转换成int，char，double...等，也就是*.parse(string)括号中一定是string类型。
+
+```javascript
+string st="5.21";
+double n =5.21;
+int.Parse(st);  //输出5
+int.Parse(n);  //报错
+```
+
+- .Convert.Toint32(double value),不完全遵循四舍五入，如果value为两个整数中的数，则返回两者中的偶数。
+
+```javascript
+Console.Writeline(Convert.ToInt32(4.3));	//四舍五入，输出4
+Console.Writeline(Convert.ToInt32(4.5));	//第一位小数为5，4.5在4和5之中，输出偶数4
+Console.Writeline(Convert.ToInt32(4.53));	//四舍五入，输出5
+
+
+
+Console.Writeline(Convert.ToInt32(5.3));	//四舍五入，输出5
+Console.Writeline(Convert.ToInt32(5.5));	//第一位小数为5，5.5在5和6之中，输出偶数6
+Console.Writeline(Convert.ToInt32(5.53));	//四舍五入，输出6
+
+
+```
+
+## 注意
+
+- Convert.ToInt()和int.Parse()对于空值(null)的处理方式不同，Convert.ToInt()会返回0而不会产生任何异常，但int.Parse()则会产生异常
