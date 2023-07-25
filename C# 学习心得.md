@@ -218,7 +218,7 @@ while(i<10)
 - 在声明初始化有元素的数组时，也可以指定数组大小
 
 ```javascript
-//声明没有元素的数组
+//声明没有元素的数组                                                                                                                                                                         w'w'we
 int[] ints= new int[6]
 //声明初始化有元素的数组
 int[] ints= new int[]{1,3,4,5}
@@ -266,7 +266,7 @@ string[] strings =new int[5]{"H","E","L","M","Q"}
   double totalPrice;//计算折前总价
 ```
 
-- 如果其中要求满几个10元，就在几个10元上打7.5折应该如何计算？
+- 现在需要购买16斤的西瓜，如果其中要求满几个10元，就在几个10元上打7.5折应该如何计算？
 
 ```c#
  double price = 1.9;
@@ -276,7 +276,7 @@ string[] strings =new int[5]{"H","E","L","M","Q"}
             totalPrice = price * count;
             int d= (int)(totalPrice/10);
             double totalten = 0;
-           for (int i = 3; i < d; i++)
+           for (int i = 0; i < d; i++)
             {
                 totalten = totalten+10 * discount;
             }
@@ -326,3 +326,75 @@ Console.Writeline(Convert.ToInt32(5.53));	//四舍五入，输出6
 ## 注意
 
 - Convert.ToInt()和int.Parse()对于空值(null)的处理方式不同，Convert.ToInt()会返回0而不会产生任何异常，但int.Parse()则会产生异常
+
+# 案例二：班级找同学案例
+
+- 班级中有张三，李四，王五，赵六，田七，周八六位同学
+- 请找出赵六同学送他回家
+- 分别时用for循环和while循环实现
+
+## while循环
+
+```c#
+ 			//初始化数组
+            string[] classStudents = { "张三", "李四", "王五", "赵六", "田七", "周八" };
+            //创建变量i作为索引，以获取数组的值
+            int i = 0;
+            //存放数组遍历到的学生名
+            string student = "";
+            //作为标记使用，便于程序判断是否找到了指定学生
+            bool isFind = true;
+            while (student != "赵六")
+            {
+                //如果索引值已经大于等于数组的长度，则说明没有找到指定的学生
+                if (i >= classStudents.Length) {
+                    MessageBox.Show("没有找到要找的人");
+                    //此时isFind标记为false，告诉系统，没有找到指定人
+                    isFind = false;
+                   //跳出循环
+                    break;
+                } 
+                //将遍历的数组元素赋值给变量student
+                student = classStudents[i++];   
+            }
+            //如果isFind为真，则说明找到指定目标，系统弹出指示
+           if(isFind) MessageBox.Show("找到了"+student+"送他回家");
+```
+
+## for循环
+
+```c#
+ 			//初始化数组
+            string[] calssStudents = new string[] { "张三", "李四", "王五", "赵六", "田七", "周八" };
+            //获取数组长度 
+            int studentCount =  calssStudents.Length;
+            //通过for循环遍历数组
+            for (int i = 0; i < studentCount; i++)
+            {
+                //如果遍历的元素时找到赵六，则进入判断体
+                if (calssStudents[i]=="赵六")
+                {
+                    MessageBox.Show("找到了" + calssStudents[i]+",送他回家");
+                    break;//跳出循环
+                }
+```
+
+
+
+## 总结
+
+- 对于数组的初始化还有一种简单便捷的方式
+
+```c#
+string[] strs={"H","J","K","L"}
+```
+
+- 获取数组长度的方式：
+
+  ```c#
+  strings.Length
+  ```
+
+- 需要跳出某个循环时可以使用**break**关键字，跳出当前循环
+- 满足某些条件后需要直接快进到下一轮循环而不再执行当前循环下的代码，可以使用**continue**关键字实现
+
